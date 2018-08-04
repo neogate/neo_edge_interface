@@ -80,16 +80,16 @@
                   }
                 }
               }
-            },
-            "serialPorts": {
-              "type": "array",
-              "items": { "type": "string" },
-              "description": "串口名称列表"
-            },
-            "defaultRoute": {
-              "type": "string",
-              "description": "默认route"
             }
+          },
+          "serialPorts": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "串口名称列表"
+          },
+          "defaultRoute": {
+            "type": "string",
+            "description": "默认route"
           }
         },
         "location": {
@@ -186,11 +186,32 @@
               "type": "object",
               "description": "工业数据名Key定义",
               "properties": {
-                "device": { "type": "string", "description": "数据来源于哪个工业设备/传感器"},
-                "address": { "type": "string", "description": "数据在工业设备/传感器中的地址", "examples": ["MW900"] },
-                "datatype": { "type": "string", "description": "数据类型", "enum": ["BOOL", "INT16", "INT32", "INT64", "REAL32", "REAL64", "WORD", "DWORD", "BYTE"] },
-                "description": { "type": "string", "description": "数据描述", },
-                "unit": { "type": "string" , "description": "数据单位" }
+                "device": {
+                  "type": "string",
+                  "description": "数据来源于哪个工业设备/传感器"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "数据在工业设备/传感器中的地址",
+                  "examples": ["MW900"]
+                },
+                "datatype": {
+                  "type": "string",
+                  "description": "数据类型",
+                  "enum": [
+                    "BOOL",
+                    "INT16",
+                    "INT32",
+                    "INT64",
+                    "REAL32",
+                    "REAL64",
+                    "WORD",
+                    "DWORD",
+                    "BYTE"
+                  ]
+                },
+                "description": { "type": "string", "description": "数据描述" },
+                "unit": { "type": "string", "description": "数据单位" }
               }
             }
           }
