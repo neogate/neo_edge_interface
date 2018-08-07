@@ -151,18 +151,23 @@
                     "idec"
                   ]
                 },
-                "interface": {
+                "devInterface": {
                   "type": "object",
                   "description": "工业设备/传感器通信接口",
                   "properties": {
-                    "name": {
+                    "type": {
                       "type": "string",
                       "description": "接口",
-                      "enum": [
-                        "UDP",
-                        "TCP",
-                        "serial"
-                      ]
+                      "enum": ["UDP", "TCP", "serial"]
+                    },
+                    "devName": {
+                      "type": "string",
+                      "description": "串口号",
+                      "example": ["COM1", "COM2"]
+                    },
+                    "extra": {
+                      "type": "object",
+                      "description": "额外通讯参数, 如波特率等"
                     },
                     "port": {
                       "type": "number",
@@ -171,18 +176,14 @@
                     "address": {
                       "type": "string",
                       "description": "工业设备/传感器地址",
-                      "example": ["192.168.0.1", "com1"]
+                      "example": ["192.168.0.1", "1", "2"]
                     }
                   }
                 },
                 "endianness": {
-                  "type": "boolean",
+                  "type": "string",
                   "description": "数据端序",
                   "enum": ["big-endian", "little-endian"]
-                },
-                "extra": {
-                  "type": "object",
-                  "description": "额外通讯参数, 如波特率等"
                 },
                 "cycle": {
                   "type": "number",

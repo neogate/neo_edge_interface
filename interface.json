@@ -123,11 +123,6 @@
                 "type": "object",
                 "description": "工业设备/传感器Key定义",
                 "properties": {
-                  "type": {
-                    "type": "string",
-                    "description": "工业设备/传感器类型",
-                    "enum": ["plc", "sensor", "io"]
-                  },
                   "protocal": {
                     "type": "string",
                     "description": "工业设备/传感器协议",
@@ -140,40 +135,88 @@
                       "idec"
                     ]
                   },
-                  "interface": {
+                  "s7Param": {
+                    "type": "object",
+                    "properties": {
+                      "slot": {
+                        "type": "number"
+                      },
+                      "rack": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "modbusParam": {
+                    "type": "object",
+                    "properties": {
+                      "endianness": {
+                        "type": "string",
+                        "description": "数据端序",
+                        "enum": ["big-endian", "little-endian"]
+                      }
+                    }
+                  },
+                  "devInterface": {
                     "type": "object",
                     "description": "工业设备/传感器通信接口",
                     "properties": {
-                      "name": {
+                      "type": {
                         "type": "string",
                         "description": "接口",
                         "enum": ["UDP", "TCP", "serial"]
                       },
-                      "port": {
-                        "type": "number",
-                        "description": "工业设备/传感器端口"
+                      "serialParam": {
+                        "type": "object",
+                        "properties": {
+                          "port": {"type": "string"},
+                          "baudRate": {
+                            "type": "number",
+                            "description": "波特率",
+                            "enum": [1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200]
+                          },
+                          "parity": {
+                            "type": "string",
+                            "example": ["none", "even", "odd", "mark", "space"]
+                          },
+                          "dataBits": {
+                            "type": "number",
+                            "enum": [5, 6, 7, 8]
+                          },
+                          "stopBits": {
+                            "type": "number",
+                            "enum": [1, 1.5, 2]
+                          },
+                          "rs": {
+                            "type": "string",
+                            "example": ["rs232", "rs422", "rs485"]
+                          },
+                          "stationNumber": {
+                            "type": "number"
+                          }
+                        }
                       },
-                      "address": {
-                        "type": "string",
-                        "description": "工业设备/传感器地址",
-                        "example": ["192.168.0.1", "com1"]
+                      "networkParam": {
+                        "type": "object",
+                        "properties": {
+                          "port": {
+                            "type": "number",
+                            "description": "工业设备/传感器端口"
+                          },
+                          "address": {
+                            "type": "string",
+                            "description": "工业设备/传感器地址",
+                            "example": ["192.168.0.1"]
+                          }
+                        }
                       }
                     }
-                  },
-                  "endianness": {
-                    "type": "boolean",
-                    "description": "数据端序",
-                    "enum": ["big-endian", "little-endian"]
-                  },
-                  "extra": {
-                    "type": "object",
-                    "description": "额外通讯参数, 如波特率等"
                   },
                   "cycle": {
                     "type": "number",
                     "description": "工业设备/传感器扫描周期 ms"
                   },
-                  "timeout": { "type": "number" }
+                  "timeout": { "type": "number" },
+                  "description": {"type": "string"}
                 }
               }
             }
