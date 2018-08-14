@@ -168,11 +168,21 @@
                       "serialParam": {
                         "type": "object",
                         "properties": {
-                          "port": {"type": "string"},
+                          "port": { "type": "string" },
                           "baudRate": {
                             "type": "number",
                             "description": "波特率",
-                            "enum": [1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200]
+                            "enum": [
+                              1200,
+                              2400,
+                              4800,
+                              9600,
+                              14400,
+                              19200,
+                              38400,
+                              57600,
+                              115200
+                            ]
                           },
                           "parity": {
                             "type": "string",
@@ -216,7 +226,7 @@
                     "description": "工业设备/传感器扫描周期 ms"
                   },
                   "timeout": { "type": "number" },
-                  "description": {"type": "string"}
+                  "description": { "type": "string" }
                 }
               }
             }
@@ -256,8 +266,7 @@
                   "description": {
                     "type": "string",
                     "description": "数据描述"
-                  },
-                  "unit": { "type": "string", "description": "数据单位" }
+                  }
                 }
               }
             }
@@ -317,6 +326,7 @@
                       "type": "string",
                       "enum": ["abs", "percentage"]
                     },
+                    "cloudLog": { "type": "boolean" },
                     "trigger": { "type": "string" },
                     "cycle": { "type": "number" },
                     "sample": { "type": "number" },
@@ -336,6 +346,10 @@
             }
           }
         }
+      },
+      "factoryModel": {
+        "type": "object",
+        "properties": {}
       }
     }
   }

@@ -267,8 +267,7 @@
                   "description": {
                     "type": "string",
                     "description": "数据描述"
-                  },
-                  "unit": { "type": "string", "description": "数据单位" }
+                  }
                 }
               }
             }
