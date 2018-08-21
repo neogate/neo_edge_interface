@@ -45,6 +45,7 @@ CREATE TABLE model_alarms (
   text TEXT,
   source VARCHAR NOT NULL,
   threshold VARCHAR NOT NULL,
+  operator VARCHAR NOT NULL,
   deadband INTEGER,
   deadbandMode INTEGER,
   delay INTEGER
