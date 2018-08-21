@@ -7,6 +7,7 @@ CREATE TABLE model_devices (
   slot INTEGER,
   rack INTEGER,
   endianness VARCHAR,
+  disable BOOLEAN,
   dev_if_type VARCHAR NOT NULL,
   dev_if_serial_port VARCHAR,
   dev_if_serial_baudRate INTEGER,
@@ -28,7 +29,7 @@ CREATE TABLE model_devices (
 CREATE TABLE model_tags (
   id SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
-  device VARCHAR NOT NULL,
+  deviceid INTEGER NOT NULL,
   address VARCHAR NOT NULL,
   datatype VARCHAR NOT NULL,
   description TEXT,
