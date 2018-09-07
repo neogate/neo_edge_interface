@@ -334,6 +334,21 @@
 
 # Example
 
+## 参数
+
+- protocal: PLC工业数据协议
+- dev_if_type: PLC接口类型, TCP/UDP/Serial
+- dev_if_nw_port: PLC以太网接口端口号
+- dev_if_nw_address: PLC以太网接口ip地址
+- endianness: 数据端序
+- dev_if_serial_port: PLC串口端口号
+- dev_if_serial_baudrate: 串口波特率
+- dev_if_serial_parity:
+- dev_if_serial_databits:
+- dev_if_serial_stopbits:
+- dev_if_serial_rs:
+- dev_if_serial_stationnumber: PLC串口地址
+
 ```json
 {
   "extModel": {
