@@ -179,11 +179,21 @@
                       "serialParam": {
                         "type": "object",
                         "properties": {
-                          "port": {"type": "string"},
+                          "port": { "type": "string" },
                           "baudRate": {
                             "type": "number",
                             "description": "波特率",
-                            "enum": [1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200]
+                            "enum": [
+                              1200,
+                              2400,
+                              4800,
+                              9600,
+                              14400,
+                              19200,
+                              38400,
+                              57600,
+                              115200
+                            ]
                           },
                           "parity": {
                             "type": "string",
@@ -227,7 +237,7 @@
                     "description": "工业设备/传感器扫描周期 ms"
                   },
                   "timeout": { "type": "number" },
-                  "description": {"type": "string"}
+                  "description": { "type": "string" }
                 }
               }
             }
@@ -302,7 +312,6 @@
     }
   }
 }
-
 ```
 
 ## QA
@@ -322,3 +331,123 @@
 ### Q: 云端对盒子的数据请求的模型, 如请求盒子以 1min 为间隔发送数据, 是否还会有数据取消发送命令
 
 ### Q: 多个数据请求方对盒子同时请求数据的时候, 服务如何进行优化处理
+
+# Example
+
+```json
+{
+  "extModel": {
+    "device": {
+      "plc1": {
+        "protocal": "s7",
+        "disable": null,
+        "dev_if_type": "TCP",
+        "cycle": 1000,
+        "timeout": 5000,
+        "description": "plc1",
+        "slot": 0,
+        "rack": 2,
+        "dev_if_nw_port": 102,
+        "dev_if_nw_address": "192.168.0.100"
+      },
+      "plc2": {
+        "protocal": "modbusTCP",
+        "disable": null,
+        "dev_if_type": "TCP",
+        "cycle": 1000,
+        "timeout": 5000,
+        "description": "plc2",
+        "endianness": "big-endian",
+        "dev_if_nw_port": 502,
+        "dev_if_nw_address": "192.168.0.101"
+      },
+      "plc3": {
+        "protocal": "modbusRTU",
+        "disable": null,
+        "dev_if_type": "serial",
+        "cycle": 1000,
+        "timeout": 5000,
+        "description": "plc3",
+        "endianness": "big-endian",
+        "dev_if_serial_port": "com1",
+        "dev_if_serial_baudrate": 19200,
+        "dev_if_serial_parity": "none",
+        "dev_if_serial_databits": 8,
+        "dev_if_serial_stopbits": 1,
+        "dev_if_serial_rs": "rs485",
+        "dev_if_serial_stationnumber": 10
+      }
+    },
+    "tags": {
+        "current": {
+            "_tag_": {
+                "config": {
+                    "description": "current",
+                    "datatype": "REAL32",
+                    "unit": "A",
+                    "public": false,
+                    "type": "raw",
+                    "equation": null,
+                    "raw": {
+                        "device": "plc1",
+                        "address": "MD100",
+                        "sample": 1000,
+                        "readonly": null,
+                        "scale": null,
+                        "rawMin": null,
+                        "rawMax": null,
+                        "scaledMin": null,
+                        "scaledMax": null
+                    }
+                }
+            }
+        },
+        "start": {
+            "_tag_": {
+                "config": {
+                    "description": "machine is start",
+                    "datatype": "BOOL",
+                    "unit": "",
+                    "public": null,
+                    "type": "raw",
+                    "equation": null,
+                    "raw": {
+                        "device": "plc1",
+                        "address": "I0.0",
+                        "sample": 1000,
+                        "readonly": null,
+                        "scale": null,
+                        "rawMin": null,
+                        "rawMax": null,
+                        "scaledMin": null,
+                        "scaledMax": null
+                    }
+                }
+            }
+        },
+        "emergencyStop": {
+            "_tag_": {
+                "config": {
+                    "description": "emergency stop",
+                    "datatype": "BOOL",
+                    "unit": null,
+                    "public": true,
+                    "type": "raw",
+                    "equation": null,
+                    "raw": {
+                        "device": "plc1",
+                        "address": "I0.0",
+                        "sample": 1000,
+                        "readonly": null,
+                        "scale": null,
+                        "rawMin": null,
+                        "rawMax": null,
+                        "scaledMin": null,
+                        "scaledMax": null
+                    }
+                }
+            }
+        }
+    }
+}
+```
