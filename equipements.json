@@ -1,0 +1,60 @@
+{
+    "alarms": {
+        "source": "instanceId.start"
+    },
+    "historic": {
+        "source": "instanceId.start"
+    },
+    "equipments": [
+        {
+            "name": "空压机",
+            "hash": "86vasf9asdfasv90s-ads",
+            "alias": "aliasA",
+            "instanceId": "sdfasdfs",
+            "version": "1.2.3.1",
+            "devices": {
+                "plc1": {
+                    "protocal": "S7",
+                    "type": "TCP",
+                    "slot": 0,
+                    "rack": 1,
+                    "address": "192.168.0.10",
+                    "port": 102,
+                    "timeout": 5000,
+                    "cycle": 1000
+                },
+                "plc2": {
+                    "protocal": "modbusRTU",
+                    "type": "serial",
+                    "port": "com1",
+                    "endianness": "big-endian",
+                    "baudRate": 115200,
+                    "parity": "even",
+                    "dataBits": 8,
+                    "stopBits": 1,
+                    "rs": "rs485",
+                    "stationNumber": 100,
+                    "timeout": 5000,
+                    "cycle": 1000
+                }
+            },
+            "tags": {
+                "start": {
+                    "device": "plc2",
+                    "address": "10001",
+                    "datatype": "BOOL"
+                },
+                "run": {
+                    "device": "plc2",
+                    "address": "10002",
+                    "datatype": "BOOL"
+                },
+                "current": {
+                    "device": "plc1",
+                    "address": "MD100",
+                    "datatype": "REAL32"
+                }
+            }
+        }
+    ]
+}

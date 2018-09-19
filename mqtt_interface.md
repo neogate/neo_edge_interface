@@ -15,7 +15,7 @@
   - management
   - livedata
   - alarmdata
-  - historicdata
+  - historicdata remove
   - logdata
   - userdefine
 - subtype
@@ -36,6 +36,26 @@
 
   ```js
   payload = {};
+  
+  ```
+
+- Box online
+
+  `[direction] = edge`
+
+  `[type] = management`
+
+  `[subtype] = online`
+
+  ```js
+  topic = "/prefix/[boxid]/edge/management/online";
+  ```
+
+  ```js
+  payload = {
+    online: true
+  };
+
   ```
 
 - Box feedback model
@@ -54,8 +74,8 @@
   payload = {
     id: "",
     name: "",
-    edgeModel: EdgeModelSchema,
-    extModel: ExtModelSchema
+    boxinfo: EdgeModelSchema,
+    equipment: ExtModelSchema
   };
   ```
 
@@ -191,7 +211,7 @@
   `[subtype] = tagname`
 
   ```js
-  topic = "/prefix/[boxid]/edge/livedata/tagname";
+  topic = "/prefix/[boxid]/edge/instanceId/livedata/tagname";
   ```
 
   ```js
