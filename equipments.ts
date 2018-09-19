@@ -72,10 +72,10 @@ export interface Device {
   endianness?: Endianness;
   dev_if_type: DevType;
   dev_if_serial_port?: string;
-  dev_if_serial_baudrate?: number;
+  dev_if_serial_baudrate?: 1200 | 2400 | 4800 | 9600 | 14400 | 19200 | 38400 | 57600 | 115200;
   dev_if_serial_parity?: RSParisty;
-  dev_if_serial_databits?: number;
-  dev_if_serial_stopbits?: number;
+  dev_if_serial_databits?: 5 | 6 | 7 | 8;
+  dev_if_serial_stopbits?: 1 | 1.5 | 2;
   dev_if_serial_rs?: RSInterface;
   dev_if_serial_stationnumber?: number;
   dev_if_nw_port?: number;
