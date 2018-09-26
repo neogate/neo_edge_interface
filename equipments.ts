@@ -105,16 +105,14 @@ export interface ETag {
   description?: string;
   public?: boolean;
   sample?: number; // 's'
+  writable?: boolean; // if writable, source should be just plctag, could not a expression
 }
 export interface Alarm {
   name?: string;
   text: string;
   class?: string;
-  source?: string;
-  threshold?: string;
-  operator?: PlcOperator;
-  deadband?: number;
-  deadbandmode?: DeadbandMode;
+  trigger?: string;
+  off_trigger?: string;
   delay?: number;
 }
 export interface Archive {
@@ -144,7 +142,6 @@ export interface Box {
   equipments: Array<Equipment>;
   devices: {[name: string]: Device};
 }
-
 
 export interface Dbset {
   length?: number;
