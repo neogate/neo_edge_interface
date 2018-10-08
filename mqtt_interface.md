@@ -317,3 +317,25 @@
   - Q1.1: feedback / report 是否需要区别
 - Q2: Cloud端主动请求盒子数据的模式，逐条响应还是按发送模式响应
 - Q3: Cloud App 数据请求，数据源是否全部都是来自于TSDB，是否有可能从盒子直接读取
+
+
+
+
+# NEW MQTT DATA
+## topic
+/equipemt/data
+## payload
+4个 ‘_’开头的字段是固定字段
+
+其它字段为etag，只能以字母开头
+
+```json
+{
+  "_id": "equipment id, global unique",
+  "_box": "box id, global unique",
+  "_type": "equipment model name / type, global unchanged, db measurement / sheet name",
+  "_ts": 1538975996608,
+  "current": 10.2,
+  "voltage": 120
+}
+```
