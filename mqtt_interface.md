@@ -323,7 +323,7 @@
 
 # NEW MQTT DATA
 ## topic
-/equipemt/data
+/equipment/data
 ## payload
 4个 ‘_’开头的字段是固定字段
 
