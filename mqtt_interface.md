@@ -339,3 +339,24 @@
   "voltage": 120
 }
 ```
+
+
+## topic
+/equipment/alarm
+## payload
+4个 ‘_’开头的字段是固定字段
+
+其它字段为etag，只能以字母开头
+
+```json
+{
+  "_id": "equipment id, global unique",
+  "_box": "box id, global unique",
+  "_type": "equipment model name / type, global unchanged, db measurement / sheet name",
+  "_ts": 1538975996608,
+  "name": "",
+  "text": "",
+  "class": "",
+  "status": true
+}
+```
