@@ -113,6 +113,7 @@ export interface Alarm {
   class?: string;
   trigger?: string;
   off_trigger?: string;
+  bit?: number;
   delay?: number;
 }
 export interface Archive {

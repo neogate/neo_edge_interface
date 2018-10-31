@@ -30,14 +30,13 @@ const boxModel = {
         etags: {
           current: { unit: "A", source: 'plc1.c', writabe: true },
           pressure: { unit: "Bar", source: 'plc2.p * 1000'  },
-          sss: {source: 'combine(plc1.a, plc2.b, plc1.c)'},
+          sss: {source: 'plc1.a + plc1.b'},
           usage: { source: 'box.cpuusage'}
         },
         alarms: {
           text: 'sdf',
           class: 'warn',
-          trigger: 'current > 10',
-          off_trigge: 'current < 9',
+          trigger: 'sss',
           delay: 0,
         },
         archives: {}
