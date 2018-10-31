@@ -21,7 +21,7 @@ const MP = {
 const boxModel = {
   equipments: [
       {
-        name: "空压机",
+        name: "kongyaji",
         hash: "9999asd7fa",
         alias: "空压机A",
         version: "v0.1",
@@ -30,10 +30,16 @@ const boxModel = {
         etags: {
           current: { unit: "A", source: 'plc1.c', writabe: true },
           pressure: { unit: "Bar", source: 'plc2.p * 1000'  },
-          alarms: {source: 'combine(plc1.a, plc2.b, plc1.c)'},
+          sss: {source: 'combine(plc1.a, plc2.b, plc1.c)'},
           usage: { source: 'box.cpuusage'}
         },
-        alarms: {},
+        alarms: {
+          text: 'sdf',
+          class: 'warn',
+          trigger: 'current > 10',
+          off_trigge: 'current < 9',
+          delay: 0,
+        },
         archives: {}
       }
   ],
