@@ -140,7 +140,7 @@ export interface Equipment {
 }
 
 export interface Box {
-  equipments: {[name: string]: Equipment};
+  equipments: {[instanceId: string]: Equipment};
   devices: {[name: string]: Device};
 }
 
