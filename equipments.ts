@@ -140,7 +140,7 @@ export interface Equipment {
 }
 
 export interface Box {
-  equipments: Array<Equipment>;
+  equipments: {[name: string]: Equipment};
   devices: {[name: string]: Device};
 }
 

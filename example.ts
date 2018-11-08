@@ -19,29 +19,28 @@ const MP = {
 };
 
 const boxModel = {
-  equipments: [
-      {
-        name: "kongyaji",
-        hash: "9999asd7fa",
-        alias: "空压机A",
-        version: "v0.1",
-        description: "花木成畦手自栽花木成畦手自栽",
-        instanceId: "asdfqsdffasdf123",
-        etags: {
-          current: { unit: "A", source: 'plc1.c', writabe: true },
-          pressure: { unit: "Bar", source: 'plc2.p * 1000'  },
-          sss: {source: 'plc1.a + plc1.b'},
-          usage: { source: 'box.cpuusage'}
-        },
-        alarms: {
-          text: 'sdf',
-          class: 'warn',
-          trigger: 'sss',
-          delay: 0,
-        },
-        archives: {}
-      }
-  ],
+  equipments: {
+    asdfqsdffasdf123: {
+      name: "kongyaji",
+      hash: "9999asd7fa",
+      alias: "空压机A",
+      version: "v0.1",
+      description: "花木成畦手自栽花木成畦手自栽",
+      etags: {
+        current: { unit: "A", source: 'plc1.c', writabe: true },
+        pressure: { unit: "Bar", source: 'plc2.p * 1000'  },
+        sss: {source: 'plc1.a + plc1.b'},
+        usage: { source: 'box.cpuusage'}
+      },
+      alarms: {
+        text: 'sdf',
+        class: 'warn',
+        trigger: 'sss',
+        delay: 0,
+      },
+      archives: {}
+    }
+  },
   devices: {
     plc1: {
       protocal: "S7",
