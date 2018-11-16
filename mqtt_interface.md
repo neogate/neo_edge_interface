@@ -321,42 +321,105 @@
 
 
 
-# NEW MQTT DATA
-## topic
-/equipment/data
-## payload
-4个 ‘_’开头的字段是固定字段
+# MQTT TO INFLUXDB
 
-其它字段为etag，只能以字母开头
+[Reference](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/)
 
-```json
+```
+weather,location=us-midwest temperature=82 1465839830100400200
+  |    -------------------- --------------  |
+  |             |             |             |
+  |             |             |             |
++-----------+--------+-+---------+-+---------+
+|measurement|,tag_set| |field_set| |timestamp|
++-----------+--------+-+---------+-+---------+
+```
+
+## measurement字段
+在archive中，为机型名，即原先type字段
+在alarms中，统一为__alarms__
+
+## tag_set字段
+包含id, box, class, name, type等，不用的tag用 `,` 分隔，不加空格，id,box等的值不使用`""`
+性能考虑，tag字段需要进行排序，如box,class,id,name,type
+
+## field_set字段
+实际etag数据字段，根据etag数据类型更改字段名为 `dataType_etag`, 如`number_quantity`。
+etag的值，如果是float，直接写值，如果是number，值后加i表示其为整型，如果是string，需要加`""`
+- Floats - by default, InfluxDB assumes all numerical field values are floats. Store the field value 82 as a float:
+    ```
+    weather,location=us-midwest temperature=82 1465839830100400200
+    ```
+- Integers - append an i to the field value to tell InfluxDB to store the number as an integer. Store the field value 82 as an integer:
+    ```
+    weather,location=us-midwest temperature=82i 1465839830100400200
+    ```
+- Strings - double quote string field values (more on quoting in Line Protocol below). Store the field value too warm as a string:
+    ```
+    weather,location=us-midwest temperature="too warm" 1465839830100400200
+    ```
+- Booleans - specify TRUE with t, T, true, True, or TRUE. Specify FALSE with f, F, false, False, or FALSE. Store the field value true as a Boolean:
+    ```
+    weather,location=us-midwest too_hot=true 1465839830100400200
+    ```
+
+### timestamp字段
+精度为ns
+
+### 关于空格
+内容中，只有两个空格，位于tag_set和field_set之间，field_set和timestamp之间，不同set之间用`,`分隔
+
+## Example
+### 假设存在机型 kongyaji
+```js
 {
-  "_id": "equipment id, global unique",
-  "_box": "box id, global unique",
-  "_type": "equipment model name / type, global unchanged, db measurement / sheet name",
-  "_ts": 1538975996608,
-  "current": 10.2,
-  "voltage": 120
+  name: "kongyaji",
+  hash: "9999asd7fa",
+  alias: "空压机A",
+  version: "v0.1",
+  description: "花木成畦手自栽花木成畦手自栽",
+  instanceId: "asdfqsdffasdf123",
+  etags: {
+    current: { dataType: "float" },
+    quantity: { dataType: "number" },
+    start: { dataType: "boolean" },
+    stop: { dataType: "boolean" },
+    info: { dataType: "string"}
+  },
+  alarms: {
+      currentHigh: { text: "current too high", class: "warning"}
+  },
+  archives: {}
 }
 ```
 
+- /equipment/archive
+    ```
+    kongyaji,box=MAABBCCDDEE,id=asdfqsdffasdf123 float_current=10.5,number_quantity=102i,boolean_start=true,boolean_stop=false,string_info="stringvalue" 1542332070257931008
+    ```
+- /equipment/alarm
+    ```
+    __alarms__,box=MAABBCCDDEE,class=warning,id=asdfqsdffasdf123,name=currentHigh,type=kongyaji status=true,value=1,text="current too high" 1542332070257931008
+    ```
 
-## topic
-/equipment/alarm
-## payload
-4个 ‘_’开头的字段是固定字段
+### 假设 kongyaji 更改 current的dataType改为number
+- /equipment/archive
+    ```
+    kongyaji,box=MAABBCCDDEE,id=asdfqsdffasdf123 number_current=11i,number_quantity=102i,boolean_start=true,boolean_stop=false,string_info="stringvalue" 1542332070257931008
+    ```
 
-其它字段为etag，只能以字母开头
+# 系统关键字，不能作为etag, archive, alarm名字及其它字段名
 
-```json
-{
-  "_id": "equipment id, global unique",
-  "_box": "box id, global unique",
-  "_type": "equipment model name / type, global unchanged, db measurement / sheet name",
-  "_ts": 1538975996608,
-  "name": "",
-  "text": "",
-  "class": "",
-  "status": true
-}
-```
+- time
+- measurement
+- tag
+- field
+- tags
+- fields
+- id
+- box
+- name
+- class
+- type
+- status
+- value

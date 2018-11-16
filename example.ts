@@ -1,5 +1,5 @@
 const MP = {
-  name: "空压机",
+  name: "kongyaji",
   hash: "9999asd7fa",
   alias: "空压机A",
   version: "v0.1",
