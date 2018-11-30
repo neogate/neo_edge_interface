@@ -395,11 +395,15 @@ etag的值，如果是float，直接写值，如果是number，值后加i表示�
 
 - /equipment/archive
     ```
-    kongyaji,box=MAABBCCDDEE,id=asdfqsdffasdf123 float_current=10.5,number_quantity=102i,boolean_start=true,boolean_stop=false,string_info="stringvalue" 1542332070257931008
+    kongyaji,box=MAABBCCDDEE,id=asdfqsdffasdf123,stateinfo=停机 float_current=10.5,number_quantity=102i,boolean_start=true,boolean_stop=false,number_state=1i,string_info="stringvalue" 1542332070257931008
     ```
 - /equipment/alarm
     ```
-    __alarms__,box=MAABBCCDDEE,class=warning,id=asdfqsdffasdf123,name=currentHigh,type=kongyaji status=true,value=1,text="current too high" 1542332070257931008
+    __alarms__,box=MAABBCCDDEE,class=warning,id=asdfqsdffasdf123,name=currentHigh,type=kongyaji state=true,value=1,text="current too high" 1542332070257931008
+    ```
+- /equipment/state
+    ```
+    __states__,box=MAABBCCDDEE,id=asdfqsdffasdf123,type=kongyaji,stateinfo=停机 state=1i, 1542332070257931008
     ```
 
 ### 假设 kongyaji 更改 current的dataType改为number
