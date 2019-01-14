@@ -1,10 +1,11 @@
+//defined on cloud
 const MP = {
-  name: "kongyaji",
-  hash: "9999asd7fa",
+  type: "设备类型",
+  // hash: "9999asd7fa",
   alias: "空压机A",
   version: "v0.1",
   description: "花木成畦手自栽花木成畦手自栽",
-  instanceId: "asdfqsdffasdf123",
+  // instanceId: "asdfqsdffasdf123",
   etags: {
     current1: { unit: "A", writabe: true, public: true, sample: 10 },
     current2: { unit: 'A', public: false },
@@ -13,31 +14,47 @@ const MP = {
     usage: {}
   },
   alarms: {
-      oilpum: {}
+    alarma: {
+      text: 'sdf',
+      class: 'warn',
+      trigger: 'sss',
+      untrigger: '',
+      express: '',
+      mode: 'express | etag',
+      enable_exp: 'etag1',
+      ondelay: 0,
+      offdelay: 0,
+    },
   },
-  archives: {}
+  archives: {
+    arch1: {
+      source: 'current1', //etag name
+      cycle: 60000, // unit: ms, <=0: onchange
+      tmax: 60000, //
+    }
+  }
 };
 
+//drag mp to box to generate box mobel
+//generate hash before model set to box
 const boxModel = {
   equipments: {
-    asdfqsdffasdf123: {
-      name: "kongyaji",
-      hash: "9999asd7fa",
+    equipementName: {
+      instanceId: "kongyaji",
+      type: '设备类型',
       alias: "空压机A",
       version: "v0.1",
       description: "花木成畦手自栽花木成畦手自栽",
+      influx_tags: [
+        '将etag映射成influxdb的tag字段值'
+      ],
       etags: {
         current: { unit: "A", source: 'plc1.c', writabe: true },
         pressure: { unit: "Bar", source: 'plc2.p * 1000'  },
         sss: {source: 'plc1.a + plc1.b'},
         usage: { source: 'box.cpuusage'}
       },
-      alarms: {
-        text: 'sdf',
-        class: 'warn',
-        trigger: 'sss',
-        delay: 0,
-      },
+      alarms: {},
       archives: {}
     }
   },
