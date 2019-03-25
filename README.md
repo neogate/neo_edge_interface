@@ -26,5 +26,5 @@
 | OFFLINE | /edge/box/{box_id}/offline<br>`{ equpments: ['ep1', 'ep2'] }` | |
 
 ## ENCODE
-- `encode: json | influxLine | binery | xml | string`
+- `encode: json | influxline | binery | xml | string`
 - `item: alarm | state | archive or ...`
