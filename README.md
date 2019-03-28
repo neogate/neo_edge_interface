@@ -17,14 +17,15 @@
 | MODEL QUERY FROM EDGE | /edge/box/json/{box_id}/model/read | /cloud/box/json/{box_id}/model/readback |
 | MODEL QUERY FROM CLOUD | /edge/box/json/{box_id}/model/readback | /cloud/box/json/{box_id}/model/read |
 | MODEL HASH QUERY | /edge/box/json/{box_id}/model/hashback | /cloud/box/json/{box_id}/model/hash |
-| ACTIVE ALARM / ARCHIVE / STATE | /edge/equipment/{encode}/{ep_id}/alarm/data<br>/edge/equipment/{encode}/{ep_id}/state/data<br>/edge/equipment/{encode}/{ep_id}/archive/data<br> | |
-| ALARM / ARCHIVE / STATE FEEDBACK | /edge/equipment/{encode}/{ep_id}/alarm/readback<br>/edge/equipment/{encode}/{ep_id}/state/readback<br>/edge/equipment/{encode}/{ep_id}/archive/readback<br> | /cloud/equipment/json/{ep_id}/{item}/read<br>`{uuid: '', encode: 'influxline', object_id: '*'}` |
+| ACTIVE ALARM / ARCHIVE | /edge/equipment/{encode}/{ep_id}/alarm/data<br>/edge/equipment/{encode}/{ep_id}/archive/data<br> | |
+| ALARM / ARCHIVE FEEDBACK | /edge/equipment/{encode}/{ep_id}/alarm/readback<br> | /cloud/equipment/json/{ep_id}/{item}/read<br>`{uuid: '', encode: 'influxline', object_id: '*'}` |
 | SET PROPERTY | /edge/equipment/{encode}/{ep_id}/{item}/writepropertyback<br>`{ uuid: 'asdfa', result: 200, object_id: /regex/, errormsg: 'asdfasd' }` | /cloud/equipment/{encode}/{ep_id}/{item}/writeproperty<br>`{ uuit: 'asdfa', object_id: /regex/, enable: true or false }` |
 | QUERY PROPERTY | /edge/equipment/{encode}/{ep_id}/{item}/readpropertyback<br>`{ uuid: 'asdfsad', key: true }` | /cloud/equipment/{encode}/{ep_id}/{item}/property/readproperty<br>`{ uuid: 'asdfasd', object_id: /regex/, }` |
 | BOX DATA READ | /edge/box/{encode}/{box_id}/realdb/readback<br>`{ uuid: 'asdfa', device: 'plc1', data: { tag1: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10}, tag2: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10} } }` | /cloud/box/{encode}/{box_id}/realdb/read<br>`{ uuid: 'asdfa', device: 'plc1', tag: /*/ }`<br>只读一次 |
 | BOX DATA WRITE | /edge/box/{encode}/{box_id}/realdb/writeback<br> | /cloud/box/{encode}/{box_id}/realdb/write<br> |
-| EQUIPMENT DATA READ | /edge/equipment/{encode}/{ep_id}/realdb/data | /cloud/equipment/{encode}/{ep_id}/realdb/read<br>`{ uuid: 'sadf', interval: 10000, etag: /*/}` |
+| EQUIPMENT DATA READ | /edge/equipment/{encode}/{ep_id}/realdb/read<br>`{uuid: ''}`<br>/edge/equipment/{encode}/{ep_id}/realdb/data<br>`{ data: { tag1: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10, appid: ['id1', 'id2']} } }` | /cloud/equipment/{encode}/{ep_id}/realdb/read<br>`{ uuid: 'sadf', interval: {appid1: 1000, appid2: 2000}, etag: /*/}` |
 | DATA WRITE | /edge/equipment/{encode}/{ep_id}/realdb/writeback<br>`{ uuid: 'asdfas', result: 200 errormsg: '' }`<br>result: 参考HTTP STATUS | /cloud/equipment/{encode}/{ep_id}/realdb/write<br>`{ uuid: 'asdfasdf', etagName: 'etag1', value: 2000 }` |
+| INFLUX TAG WRITE | /edge/equipment/{encode}/{ep_id}/influxtag/writeback<br>`{ uuid: 'asdfas', result: 200 errormsg: '' }`<br>result: 参考HTTP STATUS | /cloud/equipment/{encode}/{ep_id}/influxtag/write<br>`{ uuid: 'asdfasdf', influxtags: {tag1: '', tag2: ''} }` |
 | OFFLINE | /edge/box/json/{box_id}/box/offline<br>`{ equpments: ['ep1', 'ep2'] }` | |
 
 ## TOPIC
@@ -44,9 +45,9 @@
   - string
 - item
   - alarm
-  - state
   - archive
   - realdb
+  - influxtag
   - alarmcache
   - staetcache
   - archivecache
