@@ -82,3 +82,8 @@
 - positive value: interval
 - -1: one shot
 - < -1: on change
+
+# Clear data in iot.zephyiot.com
+- login to iot.zephyiot.com
+- `docker exec -it influxdb-dev bash`
+- `curl -XPOST "http://localhost:8086/query?pretty=true" --data-urlencode "q=DROP DATABASE test"`
