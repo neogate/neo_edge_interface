@@ -17,7 +17,7 @@
 | MODEL QUERY FROM EDGE | /edge/box/json/{box_id}/model/read | /cloud/box/json/{box_id}/model/readback |
 | MODEL QUERY FROM CLOUD | /edge/box/json/{box_id}/model/readback | /cloud/box/json/{box_id}/model/read |
 | MODEL HASH QUERY | /edge/box/json/{box_id}/model/hashback | /cloud/box/json/{box_id}/model/hash |
-| **ACTIVE ALARM / ARCHIVE** | /edge/equipment/influxline/{ep_id}/alarm/data<br>/edge/equipment/influxline/{ep_id}/archive/data<br>/edge/equipment/json/{ep_id}/alarm/data<br>/edge/equipment/json/{ep_id}/archive/data<br> | |
+| **ACTIVE ALARM / ARCHIVE** | /edge/equipment/influxline/{ep_id}/alarm/data<br>/edge/equipment/influxline/{ep_id}/archive/data<br>/edge/equipment/json/{ep_id}/alarm/data<br>`{"alarm": "string",  "class": "string",  "message": "string",  "begin": 121,  "end": 121}`<br>/edge/equipment/json/{ep_id}/archive/data<br> | |
 | ALARM / ARCHIVE FEEDBACK | /edge/equipment/{encode}/{ep_id}/alarm/readback<br> | /cloud/equipment/json/{ep_id}/{item}/read<br>`{uuid: '', encode: 'influxline', object_id: '*'}` |
 | SET PROPERTY | /edge/equipment/{encode}/{ep_id}/{item}/writepropertyback<br>`{ uuid: 'asdfa', result: 200, object_id: /regex/ or [id], errormsg: 'asdfasd' }` | /cloud/equipment/{encode}/{ep_id}/{item}/writeproperty<br>`{ uuit: 'asdfa', object_id: /regex/ or [id], enable: true or false }` |
 | **QUERY PROPERTY** | /edge/equipment/{encode}/{ep_id}/{item}/readpropertyback<br>`{ uuid: 'asdfsad', key: true }` | /cloud/equipment/{encode}/{ep_id}/{item}/property/readproperty<br>`{ uuid: 'asdfasd', object_id: /regex/ or [id], }` |
