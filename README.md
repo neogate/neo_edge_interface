@@ -9,10 +9,10 @@
 # TOPIC
 | PHASE | EDGE -> CLOUD | CLOUD -> EDGE |
 | :--- | :--- | :--- |
-| POWER ON | /edge/box/json/{box_id}/box/online<br>`{ modelhash: 'asdfasdf' }` | |
-| EP CONNECT | /edge/equipment/json/{ep_id}/equipment/online<br>`{ status: 'GOOD | BAD | LOST' }` | |
-| DEVICE MANAGEMENT ROUTING | /edge/box/json/{box_id}/device/status<br>`{ device1: 'ONLINE', device2: 'LOST', }`<br>device 状态可单个发送 | |
-| DEVICE MANAGEMENT ROUTING | /edge/box/json/{box_id}/device/statusback<br>`{ uuid: 'asdfadsf' device1: 'ONLINE', device2: 'LOST', }`<br>device 状态可单个发送 | /cloud/box/json/{box_id}/device/status<br>`{ uuid: 'sdfasdf', device: /sdfs/; }` |
+| POWER ON<br>主动发/被动响应<br>同一个topic<br>被动响应时附上云端的uuid | /edge/box/json/{box_id}/box/online<br>`{ modelhash: 'asdfasdf', uuid: 'asdf' }` | **NEW**<br>/cloud/box/json/{box_id}/box/onlinecheck<br>`{uuid: 'asdf'}` |
+| EP CONNECT<br>主动发/被动响应<br>同一个topic<br>被动响应时附上云端的uuid | /edge/equipment/json/{ep_id}/equipment/online<br>`{ status: 'GOOD or BAD or LOST', uuid: 'asdf' }` | **NEW**<br>/cloud/equipment/json/{ep_id}/equipment/onlinecheck<br>`{uuid: 'asdf'}` |
+| DEVICE MANAGEMENT ROUTING<br>主动发/被动响应<br>同一个topic<br>被动响应时附上云端的uuid | /edge/box/json/{box_id}/device/status<br>`{ device1: 'ONLINE', device2: 'LOST', uuid: 'asdf'}`<br>device 状态可单个发送 | **NEW**<br>/cloud/box/json/{box_id}/device/statuscheck<br>`{uuid: 'asdf'}` |
+| ~~DEVICE MANAGEMENT ROUTING~~ | ~~/edge/box/json/{box_id}/device/statusback~~<br>`{ uuid: 'asdfadsf' device1: 'ONLINE', device2: 'LOST', }`<br>device 状态可单个发送 | ~~/cloud/box/json/{box_id}/device/status~~<br>`{ uuid: 'sdfasdf', device: /sdfs/; }` |
 | MODEL SET | /edge/box/json/{box_id}/model/setback<br>`{ reust: 200, errormsg: '', uuid: '' }` | /cloud/box/json/{box_id}/model/set<br>`{ uuid: 'sdfs', hash: '', model: {} }` |
 | MODEL QUERY FROM EDGE | /edge/box/json/{box_id}/model/read | /cloud/box/json/{box_id}/model/readback |
 | MODEL QUERY FROM CLOUD | /edge/box/json/{box_id}/model/readback | /cloud/box/json/{box_id}/model/read |
@@ -23,7 +23,7 @@
 | **QUERY PROPERTY** | /edge/equipment/{encode}/{ep_id}/{item}/readpropertyback<br>`{ uuid: 'asdfsad', key: true }` | /cloud/equipment/{encode}/{ep_id}/{item}/property/readproperty<br>`{ uuid: 'asdfasd', object_id: /regex/ or [id], }` |
 | *BOX DATA READ* | /edge/box/{encode}/{box_id}/realdb/readback<br>`{ uuid: 'asdfa', device: 'plc1', data: { tag1: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10}, tag2: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10} } }` | /cloud/box/{encode}/{box_id}/realdb/read<br>`{ uuid: 'asdfa', device: 'plc1', tag: /regex/ or [id] }`<br>只读一次 |
 | BOX DATA WRITE | /edge/box/{encode}/{box_id}/realdb/writeback<br> | /cloud/box/{encode}/{box_id}/realdb/write<br> |
-| *EQUIPMENT DATA READ* | /edge/equipment/{encode}/{ep_id}/realdb/read<br>`{uuid: ''}`<br>/edge/equipment/{encode}/{ep_id}/realdb/data<br>`{ data: { tag1: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10, appid: ['id1', 'id2']} } }` | /cloud/equipment/{encode}/{ep_id}/realdb/read<br>`{ uuid: 'sadf', interval: {appid1: 1000, appid2: 2000}, etag: /regex/ or [id]}` |
+| *EQUIPMENT DATA READ*<br>主动发/被动响应<br>同一个topic<br>被动响应时附上云端的uuid | ~~/edge/equipment/{encode}/{ep_id}/realdb/read~~<br>`{uuid: ''}`<br>/edge/equipment/{encode}/{ep_id}/realdb/data<br>`{ data: { tag1: { value:20688 , timestamp:1553487445553487444 , quality:0 , type:10, appid: ['id1', 'id2']} }, uuid: '' }` | /cloud/equipment/{encode}/{ep_id}/realdb/read<br>`{ uuid: 'sadf', interval: {appid1: 1000, appid2: 2000}, etag: /regex/ or [id]}` |
 | DATA WRITE | /edge/equipment/{encode}/{ep_id}/realdb/writeback<br>`{ uuid: 'asdfas', result: 200 errormsg: '' }`<br>result: 参考HTTP STATUS | /cloud/equipment/{encode}/{ep_id}/realdb/write<br>`{ uuid: 'asdfasdf', etagName: 'etag1', value: 2000 }` |
 | INFLUX TAG WRITE | /edge/equipment/{encode}/{ep_id}/influxtag/writeback<br>`{ uuid: 'asdfas', result: 200 errormsg: '' }`<br>result: 参考HTTP STATUS | /cloud/equipment/{encode}/{ep_id}/influxtag/write<br>`{ uuid: 'asdfasdf', influxtags: {tag1: '', tag2: ''} }` |
 | OFFLINE | /edge/box/json/{box_id}/box/offline<br>`{ equpments: ['ep1', 'ep2'] }` | |
